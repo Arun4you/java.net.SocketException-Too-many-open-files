@@ -1,21 +1,25 @@
-# java.net.SocketException-Too-many-open-files
+# java.net.SocketException-Too-many-open-files:
+
 Every time a socket connection is opened, it is treated like a file, so it uses a file descriptor. The file descriptors are set as a resource by the OS. It seems like at the time of the error there was heavy user activity where sockets were being opened/closed at a high rate in a smaller window of time. So due to this, there are really three things we can do to help understand/resolve the issue. 
 
-#Purpose
+#Purpose:
+
 This document discusses how to narrow down and resolve issues involving file descriptors, often reported in Java exceptions with the terms "too many open files."
 
-Problem Description
+Problem Description:
 
 The following two stack traces indicate the same issue and report the same message: Too many open files
 
-Exception 1
+Exception 1:
+
 java.net.SocketException: Too many open files
 at java.net.PlainSocketImpl.accept(Compiled Code)
 at java.net.ServerSocket.implAccept(Compiled Code)
 at java.net.ServerSocket.accept(Compiled Code)
 at weblogic.t3.srvr.ListenThread.run(Compiled Code)
 
-Exception 2
+Exception 2:
+
 java.io.IOException: Too many open files
 at java.lang.UNIXProcess.forkAndExec(Native Method)
 at java.lang.UNIXProcess.(UNIXProcess.java:54)
