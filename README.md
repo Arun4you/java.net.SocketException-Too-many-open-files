@@ -1,0 +1,2 @@
+# java.net.SocketException-Too-many-open-files
+Every time a socket connection is opened, it is treated like a file, so it uses a file descriptor. The file descriptors are set as a resource by the OS. It seems like at the time of the error there was heavy user activity where sockets were being opened/closed at a high rate in a smaller window of time. So due to this, there are really three things we can do to help understand/resolve the issue. 
